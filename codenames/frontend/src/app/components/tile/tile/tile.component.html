@@ -1,0 +1,5 @@
+<div [class] = "clicked ? 'clicked-tile' : 'tile'">
+    <div [class]="isPlayer || clicked ? 'black-text' : styleText">
+        {{ word }}
+    </div>
+</div>

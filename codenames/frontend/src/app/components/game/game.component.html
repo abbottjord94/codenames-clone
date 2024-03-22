@@ -1,0 +1,36 @@
+<div class = "container">
+    <div class = "row">
+        <div class = "col-4 center-block text-center">
+            <h1>Codenames LMAO</h1>
+        </div> 
+    </div>
+    <ng-container *ngFor="let tile of gameState.gameWords; let i = index">
+        <div class="row margin-px-2" *ngIf="i % 6 === 0">
+            <div class="col-2 padding-px-2" *ngFor="let innerTile of gameState.gameWords.slice(i, i + 6); let j = index">
+                <app-tile 
+                [word]="innerTile.word" 
+                [color]="innerTile.color" 
+                [clicked]="innerTile.clicked" 
+                [isPlayer]="isPlayer"
+                (click)="handleClick(i + j)"></app-tile>
+            </div>
+        </div>
+    </ng-container>
+    
+    <div class = "row margin-top-px-20">
+        <div class = "col-2">
+            <app-button [text]="'next player'" (click)="handleNextPlayer()"></app-button>
+        </div>
+        <div class = "col-2">
+            <app-button [text]="isPlayer ? 'Switch to Spymaster' : 'Switch to Player'" (click)="handleSpymaster()"></app-button>
+        </div>
+        <div class = "col-2">
+            <div [innerHTML]="gameState.isRedTurn ? 'Reds Turn' : 'Blues Turn'"></div>
+        </div>
+        <div class = "col-2">
+            <div [innerHTML]="'Red Score: ' + gameState.redScore"></div>
+            <div [innerHTML]="'Blue Score: ' + gameState.blueScore"></div>
+            <div *ngIf="gameState.redWin || gameState.blueWin" [innerHTML]= "gameState.redWin ? 'Red Wins!' : 'Blue Wins!'"></div>
+        </div>
+    </div>
+</div>
